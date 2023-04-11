@@ -1,4 +1,4 @@
-# OpenBSD 7.1
+# OpenBSD 7.2
 
 - User: root
 - vCPU: 2

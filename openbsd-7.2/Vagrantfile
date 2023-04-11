@@ -1,14 +1,13 @@
 Vagrant.configure("2") do |config|
   config.vm.guest = "openbsd"
 
-  config.vm.box = "emulate/openbsd-7.0"
+  config.vm.box = "emulate/openbsd-7.2"
   config.vm.ignore_box_vagrantfile = true
   config.vm.box_check_update = false
   config.vm.box_download_checksum_type = "sha256"
-  config.vm.box_download_checksum = "e9dbde3273d48adeabf050d163b0f50b848b7846f030a2a037457388e4a42dac"
+  config.vm.box_download_checksum = "4344289d514194ee7b00a1719420f4fc02fff558a53f3229c640d6a6e5c19b64"
   config.vm.box_url = [
-    "https://app.vagrantup.com/emulate/boxes/openbsd-7.0/versions/0.1.3/providers/virtualbox.box",
-    "https://github.com/mario-campos/emulate/releases/download/openbsd-7.0_0.1.3/packer_default_virtualbox.box",
+    "https://app.vagrantup.com/generic/boxes/openbsd7/versions/4.2.14/providers/virtualbox.box"
   ]
 
   config.vm.synced_folder ".", "/vagrant", disabled: true

@@ -6,7 +6,7 @@ GitHub Actions for BSD.
 runs-on: macos-12
 steps:
 - name: Bootstrap OpenBSD
-  uses: mario-campos/emulate@v1
+  uses: moritzbuhl/emulate@v1
   with:
     operating-system: openbsd-latest
 - name: Build
@@ -19,8 +19,7 @@ steps:
 
 | Supported OS  | Input |
 | ------------- | ----- |
-| OpenBSD 7.1   |`openbsd-7.1`, `openbsd-latest`  |
-| OpenBSD 7.0   |`openbsd-7.0`                    |
+| OpenBSD 7.2   |`openbsd-7.2`, `openbsd-latest`  |
 | FreeBSD 13.0  |`freebsd-13.0`, `freebsd-latest` |
 | NetBSD 9.2    |`netbsd-9.2`, `netbsd-latest`    |
 
