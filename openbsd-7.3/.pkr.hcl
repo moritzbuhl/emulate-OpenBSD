@@ -71,7 +71,7 @@ build {
   # Disable unnecessary services to save CPU cycles.
   provisioner "shell" {
     inline = [
-      "rcctl disable check_quotas cron dhcpleased library_aslr ntpd pf pflogd resolvd slaacd smtpd sndiod syslogd",
+      "rcctl disable check_quotas cron library_aslr ntpd pf pflogd slaacd smtpd sndiod",
     ]
   }
 
