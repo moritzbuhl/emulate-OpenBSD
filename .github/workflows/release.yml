@@ -6,6 +6,9 @@ name: Handle Release
 jobs:
   setup-hashicorp:
     runs-on: macos-12
+    strategy:
+      matrix:
+        os: [ openbsd-current, openbsd-7.3, openbsd-7.2 ]
     steps:
     - name: Install Hashicorp Packer
       run: |
@@ -13,25 +16,12 @@ jobs:
         brew install hashicorp/tap/packer
     - name: Checkout repository
       uses: actions/checkout@master
-  generate-artifacts:
-    name: Build artifacts and generate checksums
-    runs-on: macos-12
-    needs: [ setup-hashicorp ]
-    strategy:
-      matrix:
-        os: [ openbsd-current, openbsd-7.3, openbsd-7.2 ]
-    steps:
     - name: Build
       run: |
         packer build "${{ matrix.os }}"
     - name: Checksum
       run: |
         sed -i -e "s/config.vm.box_download_checksum .*/config.vm.box_download_checksum = \"$(shasum -a 256 "${{ matrix.os }}/packer_default_virtualbox.box")\"/" "${{ matrix.os }}/Vagrantfile
-  do-git:
-    name: Publish artifacts and repository
-    runs-on: macos-12
-    needs: [ generate-artifacts ]
-    steps:
     - name: Push tag and checksums
       run: |
         git config user.name "${GITHUB_ACTOR}"
@@ -40,14 +30,6 @@ jobs:
         git commit -m 'Update artifacts and checksums.'
         git tag -f latest
         git push --force origin latest
-  upload-artifacts:
-    name: Upload artifacts
-    runs-on: macos-12
-    needs: [ do-git ]
-    strategy:
-      matrix:
-        os: [ openbsd-current, openbsd-7.3, openbsd-7.2 ]
-    steps:
     - name: Upload
       run: |
         curl \
