@@ -16,7 +16,9 @@ jobs:
     - name: Build
       run: |
         for p in openbsd-current openbsd-7.3 openbsd-7.2; do \
-          packer build "$p"; \
+          while ! packer build "$p"; do \
+            sleep 1;
+          done \
         done
     - name: Checksum
       run: |

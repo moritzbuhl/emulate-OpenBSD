@@ -21,7 +21,7 @@ source "virtualbox-iso" "default" {
 
   ssh_username = "root"
   ssh_password = local.ssh_password
-  ssh_timeout = "2h"
+  ssh_timeout = "10m"
 
   guest_additions_mode = "disable" # OpenBSD is unsupported
   acpi_shutdown        = true
@@ -33,7 +33,7 @@ source "virtualbox-iso" "default" {
     })
   }
 
-  boot_wait = "120s"
+  boot_wait = "30s"
   boot_command = [
     "A<enter>",
     "<wait>",
