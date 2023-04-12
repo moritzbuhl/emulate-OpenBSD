@@ -1,6 +1,6 @@
 locals {
   version      = "0.1.1"
-  ssh_password = "vagrant"
+  ssh_password = "toor"
 }
 
 source "virtualbox-iso" "default" {
@@ -10,14 +10,14 @@ source "virtualbox-iso" "default" {
   cpus = 2
 
   # The VM needs 1024 MB of RAM in order install successfully.
-  memory = 1024
+  memory = 1228
 
-  disk_size            = 14000 # 14 GB
+  disk_size            = 256000 # 256 GB
   hard_drive_interface = "scsi"
   nic_type             = "virtio"
 
-  iso_url      = "https://cdn.openbsd.org/pub/OpenBSD/7.2/amd64/install72.iso"
-  iso_checksum = "file:https://cdn.openbsd.org/pub/OpenBSD/7.2/amd64/SHA256"
+  iso_url      = "https://cdn.openbsd.org/pub/OpenBSD/7.3/amd64/install73.iso"
+  iso_checksum = "file:https://cdn.openbsd.org/pub/OpenBSD/7.3/amd64/SHA256"
 
   ssh_username = "root"
   ssh_password = local.ssh_password
@@ -28,7 +28,7 @@ source "virtualbox-iso" "default" {
   http_content = {
     "/install.conf" = templatefile("install.conf.template", {
       root_password = local.ssh_password
-      disklabel_url = "https://raw.githubusercontent.com/moritzbuhl/emulate/main/openbsd-7.2/disklabel.template"
+      disklabel_url = "https://raw.githubusercontent.com/moritzbuhl/emulate/main/openbsd-7.3/disklabel.template"
     })
   }
 

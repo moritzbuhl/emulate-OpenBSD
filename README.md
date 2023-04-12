@@ -19,7 +19,7 @@ steps:
 
 | Supported OS  | Input |
 | ------------- | ----- |
-| OpenBSD 7.2   |`openbsd-7.2`, `openbsd-latest`  |
+| OpenBSD 7.3   |`openbsd-7.3`, `openbsd-latest`  |
 | FreeBSD 13.0  |`freebsd-13.0`, `freebsd-latest` |
 | NetBSD 9.2    |`netbsd-9.2`, `netbsd-latest`    |
 
