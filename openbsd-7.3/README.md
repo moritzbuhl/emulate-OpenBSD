@@ -3,7 +3,7 @@
 - User: root
 - vCPU: 2
 - RAM: 12 GiB
-- Storage: 256 GiB
+- Storage: 250 GB
 
 ### Included packages
 
@@ -17,13 +17,20 @@
 - meson
 - rust
 
+### Active services
+
+- dhcpleased
+- resolvd
+- sshd
+
 ### Disabled services
 
+- check_quotas
 - cron
+- library_aslr
+- ntpd
+- pf
 - pflogd
 - slaacd
+- smtpd
 - sndiod
-
-### Included syspatch(8) patches
-
-- 001
