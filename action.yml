@@ -1,4 +1,4 @@
-name: emulate
+name: emulate-OpenBSD
 description: Emulate unsupported operating systems using QEMU.
 inputs:
   operating-system:

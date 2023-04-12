@@ -21,7 +21,7 @@ steps:
 | Supported OS  | Input |
 | ------------- | ----- |
 | OpenBSD 7.3 -current | `openbsd-current` |
-| OpenBSD 7.3 -stable | `openbsd-7.3`, `openbsd-release` |
+| OpenBSD 7.3 -stable | `openbsd-7.3`, `openbsd-stable` |
 | OpenBSD 7.2 -stable | `openbsd-7.2` |
 
 ### Limitations

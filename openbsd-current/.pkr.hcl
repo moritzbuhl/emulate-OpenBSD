@@ -16,8 +16,8 @@ source "virtualbox-iso" "default" {
   hard_drive_interface = "scsi"
   nic_type             = "virtio"
 
-  iso_url      = "https://cdn.openbsd.org/pub/OpenBSD/7.3/amd64/install73.iso"
-  iso_checksum = "file:https://cdn.openbsd.org/pub/OpenBSD/7.3/amd64/SHA256"
+  iso_url      = "https://cdn.openbsd.org/pub/OpenBSD/snapshots/amd64/install73.iso"
+  iso_checksum = "file:https://cdn.openbsd.org/pub/OpenBSD/snapshots/amd64/SHA256"
 
   ssh_username = "root"
   ssh_password = local.ssh_password
@@ -28,7 +28,7 @@ source "virtualbox-iso" "default" {
   http_content = {
     "/install.conf" = templatefile("install.conf.template", {
       root_password = local.ssh_password
-      disklabel_url = "https://raw.githubusercontent.com/moritzbuhl/emulate-OpenBSD/main/openbsd-7.3/disklabel.template"
+      disklabel_url = "https://raw.githubusercontent.com/moritzbuhl/emulate-OpenBSD/main/openbsd-snapshots/disklabel.template"
     })
   }
 
