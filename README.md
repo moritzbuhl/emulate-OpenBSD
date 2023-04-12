@@ -6,7 +6,7 @@ GitHub Actions for OpenBSD.
 runs-on: macos-12
 steps:
 - name: Bootstrap OpenBSD
-  uses: moritzbuhl/emulate-OpenBSD@v1
+  uses: moritzbuhl/emulate-OpenBSD@latest
   with:
     operating-system: openbsd-latest
 - name: Build
