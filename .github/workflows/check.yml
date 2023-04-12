@@ -17,7 +17,7 @@ jobs:
     needs: [setup-hashicorp]
     strategy:
       matrix:
-        os: [openbsd-7.0]
+        os: [openbsd-7.3]
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
