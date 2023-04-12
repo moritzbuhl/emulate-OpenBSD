@@ -61,7 +61,7 @@ build {
   }
 
   provisioner "shell" {
-    inline = ["pkg_add git got cmake meson autoconf-2.71 automake-1.16.3 libtool"]
+    inline = ["pkg_add git got cmake meson autoconf-2.71 automake-1.16.3 libtool llvm rust"]
   }
 
   # Run dhclient instead of running dhcpleased; save some CPU cycles.
