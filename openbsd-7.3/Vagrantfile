@@ -5,7 +5,7 @@ Vagrant.configure("2") do |config|
   config.vm.ignore_box_vagrantfile = true
   config.vm.box_check_update = false
   config.vm.box_download_checksum_type = "sha256"
-  config.vm.box_download_checksum = "c60d971c0c4efc3d20f8ed757e0164e1e7d5d8caa312699c1f00ad64109e6d60"
+  config.vm.box_download_checksum = "b34187ece5c084411ad538a7e38f02de58246aeed8514a820b49726ae90916df"
   config.vm.box_url = [
     "https://app.vagrantup.com/mbuhl/boxes/OpenBSD/versions/7.3.0/providers/virtualbox.box"
   ]
