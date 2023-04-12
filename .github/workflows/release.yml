@@ -1,0 +1,64 @@
+on:
+  release:
+    types: [ created ]
+
+name: Handle Release
+jobs:
+  setup-hashicorp:
+    runs-on: macos-12
+    steps:
+    - name: Install Hashicorp Packer
+      run: |
+        curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+        sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+        sudo apt-get update
+        sudo apt-get install packer
+    - name: Checkout repository
+      uses: actions/checkout@master
+  generate-artifacts:
+    name: Build artifacts and generate checksums
+    runs-on: macos-12
+    needs: [ setup-hashicorp ]
+    strategy:
+      matrix:
+        os: [ openbsd-current, openbsd-7.3, openbsd-7.2 ]
+    steps:
+    - name: Build
+      run: |
+        packer build "${{ matrix.os }}"
+    - name: Checksum
+      run: |
+        sed -i -e "s/config.vm.box_download_checksum .*/config.vm.box_download_checksum = \"$(shasum -a 256 "${{ matrix.os }}/packer_default_virtualbox.box")\"/" "${{ matrix.os }}/Vagrantfile
+  do-git:
+    name: Publish artifacts and repository
+    runs-on: macos-12
+    needs: [ generate-artifacts ]
+    steps:
+    - name: Push tag and checksums
+      run: |
+        git config user.name "${GITHUB_ACTOR}"
+        git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+        git add .
+        git commit -m 'Update artifacts and checksums.'
+        git tag -f latest
+        git push --force origin latest
+  upload-artifacts:
+    name: Upload artifacts
+    runs-on: macos-12
+    needs: [ do-git ]
+    strategy:
+      matrix:
+        os: [ openbsd-current, openbsd-7.3, openbsd-7.2 ]
+    steps:
+    - name: Upload
+      run: |
+        curl \
+          -sSL \
+          -XPOST \
+          -H "Authorization: token ${GITHUB_TOKEN}" \
+          --upload-file "${{ matrix.os }}/packer_default_virtualbox.box" \
+          --header "Content-Type:application/octet-stream" \
+          --write-out "%{errormsg}" \
+          "https://uploads.github.com/repos/${GITHUB_REPOSITORY}/releases/latest/assets?name=${{ matrix.os }}.box"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
