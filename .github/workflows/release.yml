@@ -16,7 +16,8 @@ jobs:
     - name: Build
       run: |
         for p in openbsd-7.2; do \
-          while ! packer build "$p"; do \
+          for i in 1 2 3; do \
+            packer build "$p" && break; \
             sleep 1;
           done \
         done

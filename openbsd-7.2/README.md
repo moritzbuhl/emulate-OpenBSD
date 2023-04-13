@@ -2,8 +2,8 @@
 
 - User: root
 - vCPU: 2
-- RAM: 12 GiB
-- Storage: 250 GB
+- RAM: 1024 MB
+- Storage: 10 GB
 
 ### Included packages
 

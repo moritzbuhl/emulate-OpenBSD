@@ -10,10 +10,10 @@ source "virtualbox-iso" "default" {
   cpus = 2
 
   # The VM needs 1024 MB of RAM in order install successfully.
-  memory = 1228
+  memory = 1024
 
-  disk_size            = 256000 # 256 GB
-  hard_drive_interface = "scsi"
+  disk_size            = 10000 # 10 GB
+  hard_drive_interface = "sata"
   nic_type             = "virtio"
 
   iso_url      = "https://cdn.openbsd.org/pub/OpenBSD/snapshots/amd64/install73.iso"
@@ -21,7 +21,7 @@ source "virtualbox-iso" "default" {
 
   ssh_username = "root"
   ssh_password = local.ssh_password
-  ssh_timeout = "10m"
+  ssh_timeout = "30m"
 
   guest_additions_mode = "disable" # OpenBSD is unsupported
   acpi_shutdown        = true
@@ -33,7 +33,7 @@ source "virtualbox-iso" "default" {
     })
   }
 
-  boot_wait = "30s"
+  boot_wait = "2m"
   boot_command = [
     "A<enter>",
     "<wait>",
