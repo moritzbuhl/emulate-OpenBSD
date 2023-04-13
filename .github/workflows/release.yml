@@ -15,14 +15,14 @@ jobs:
       uses: actions/checkout@master
     - name: Build
       run: |
-        for p in openbsd-current openbsd-7.3 openbsd-7.2; do \
+        for p in openbsd-7.2; do \
           while ! packer build "$p"; do \
             sleep 1;
           done \
         done
     - name: Checksum
       run: |
-        for p in openbsd-current openbsd-7.3 openbsd-7.2; do \
+        for p in openbsd-7.2; do \
           sed -i -e "s/config.vm.box_download_checksum .*/config.vm.box_download_checksum = \"$(shasum -a 256 "$p/packer_default_virtualbox.box")\"/" "$p/Vagrantfile; \
         done
     - name: Push tag and checksums
@@ -35,7 +35,7 @@ jobs:
         git push --force origin latest
     - name: Upload
       run: |
-        for p in openbsd-current openbsd-7.3 openbsd-7.2; do \
+        for p in openbsd-7.2; do \
           curl \
             -sSL \
             -XPOST \
